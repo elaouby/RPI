@@ -1,4 +1,4 @@
-#curl http://files.elaouby.com/rpi/rpi.sh | sudo bash -s -- -r -p -d -g
+#git clone https://github.com/elaouby/RPI /home/admin/RPI ; cd /home/admin/RPI ; sudo bash ./rpi.sh -r -p -d -g
 while getopts "rpdg" option; do
 case $option in
 r)
@@ -13,7 +13,7 @@ echo "root	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 echo "%admin	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 echo "%sudo	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 echo "admin	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-wget -np -r -nH --cut-dirs=1 -P /etc/polkit-1/localauthority http://files.elaouby.com/rpi/50-local.d/ -R rpi.sh,index.html*
+sudo cp -r /home/admin/RPI/50-local.d /etc/polkit-1/localauthority
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 7FA3303E
 sudo curl https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -
 sudo curl http://archive.raspberrypi.org/debian/raspberrypi.gpg.key | sudo apt-key add -
@@ -110,7 +110,7 @@ echo 'Exec=/etc/conky/conky.sh' >> /home/admin/.config/autostart/conky.desktop
 echo 'Hidden=false' >> /home/admin/.config/autostart/conky.desktop
 echo 'NoDisplay=false' >> /home/admin/.config/autostart/conky.desktop
 echo 'Terminal=false' >> /home/admin/.config/autostart/conky.desktop
-wget -np -r -nH --cut-dirs=1 -P /etc http://files.elaouby.com/rpi/conky/ -R rpi.sh,lite.sh,index.html*
+sudo cp -r /home/admin/RPI/conky /etc
 chmod +x /etc/conky/conky.sh
 sudo rm /etc/conky/conky.conf
 sudo mkdir -p /home/admin/.config/lxpanel/LXDE-pi
@@ -381,7 +381,7 @@ echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/media/admin/Plex/"
 echo 'User=admin' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
 echo 'Group=admin' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
 echo 'UMask=0000' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
-wget -np -r -nH --cut-dirs=1 -P /etc/polkit-1/localauthority http://files.elaouby.com/rpi/50-local.d/ -R rpi.sh,index.html*
+sudo cp -r /home/admin/RPI/50-local.d /etc/polkit-1/localauthority
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 7FA3303E
 sudo curl https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -
 sudo curl http://archive.raspberrypi.org/debian/raspberrypi.gpg.key | sudo apt-key add -
@@ -516,7 +516,7 @@ echo 'Exec=/etc/conky/conky.sh' >> /home/admin/.config/autostart/conky.desktop
 echo 'Hidden=false' >> /home/admin/.config/autostart/conky.desktop
 echo 'NoDisplay=false' >> /home/admin/.config/autostart/conky.desktop
 echo 'Terminal=false' >> /home/admin/.config/autostart/conky.desktop
-wget -np -r -nH --cut-dirs=1 -P /etc http://files.elaouby.com/rpi/conky/ -R rpi.sh,lite.sh,index.html*
+sudo cp -r /home/admin/RPI/conky /etc
 chmod +x /etc/conky/conky.sh
 sudo rm /etc/conky/conky.conf
 echo '#! /bin/bash' > /etc/conky/conky.sh
@@ -773,7 +773,7 @@ echo "root	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 echo "%admin	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 echo "%sudo	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 echo "admin	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-wget -np -r -nH --cut-dirs=1 -P /etc/polkit-1/localauthority http://files.elaouby.com/rpi/50-local.d/ -R rpi.sh,index.html*
+sudo cp -r /home/admin/RPI/50-local.d /etc/polkit-1/localauthority
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 7FA3303E
 sudo curl http://archive.raspberrypi.org/debian/raspberrypi.gpg.key | sudo apt-key add -
 sudo apt-get check
@@ -867,7 +867,7 @@ echo 'Exec=/etc/conky/conky.sh' >> /home/admin/.config/autostart/conky.desktop
 echo 'Hidden=false' >> /home/admin/.config/autostart/conky.desktop
 echo 'NoDisplay=false' >> /home/admin/.config/autostart/conky.desktop
 echo 'Terminal=false' >> /home/admin/.config/autostart/conky.desktop
-wget -np -r -nH --cut-dirs=1 -P /etc http://files.elaouby.com/rpi/conky/ -R rpi.sh,lite.sh,index.html*
+sudo cp -r /home/admin/RPI/conky /etc
 chmod +x /etc/conky/conky.sh
 sudo rm /etc/conky/conky.conf
 echo '#! /bin/bash' > /etc/conky/conky.sh
@@ -1325,7 +1325,7 @@ echo "root	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 echo "%admin	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 echo "%sudo	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 echo "admin	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-wget -np -r -nH --cut-dirs=1 -P /etc/polkit-1/localauthority http://files.elaouby.com/rpi/50-local.d/ -R rpi.sh,index.html*
+sudo cp -r /home/admin/RPI/50-local.d /etc/polkit-1/localauthority
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 7FA3303E
 sudo curl http://archive.raspberrypi.org/debian/raspberrypi.gpg.key | sudo apt-key add -
 sudo apt-get check
@@ -1419,7 +1419,7 @@ echo 'Exec=/etc/conky/conky.sh' >> /home/admin/.config/autostart/conky.desktop
 echo 'Hidden=false' >> /home/admin/.config/autostart/conky.desktop
 echo 'NoDisplay=false' >> /home/admin/.config/autostart/conky.desktop
 echo 'Terminal=false' >> /home/admin/.config/autostart/conky.desktop
-wget -np -r -nH --cut-dirs=1 -P /etc http://files.elaouby.com/rpi/conky/ -R rpi.sh,lite.sh,index.html*
+sudo cp -r /home/admin/RPI/conky /etc
 chmod +x /etc/conky/conky.sh
 sudo rm /etc/conky/conky.conf
 echo '#! /bin/bash' > /etc/conky/conky.sh
@@ -1882,6 +1882,7 @@ echo "Choose option -r -p -d -g"
 esac
 done
 sudo find /tmp -type f -delete
+sudo rm -r /home/admin/RPI
 echo "Done"
 echo "Rebooting in 5s..."
 sleep 5
