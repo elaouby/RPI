@@ -754,7 +754,7 @@ d)
 #(echo y; echo 1) | argonone-config
 #(echo y; echo 1; echo 1) | argonone-ir
 git clone https://gitlab.com/DarkElvenAngel/argononed.git
-cd /home/admin/argononed
+cd /home/admin/RPI/argononed
 sudo ./install
 sudo ./configure
 sudo systemctl enable argononed
@@ -1308,7 +1308,7 @@ g)
 #(echo y; echo 1) | argonone-config
 #(echo y; echo 1; echo 1) | argonone-ir
 git clone https://gitlab.com/DarkElvenAngel/argononed.git
-cd /home/admin/argononed
+cd /home/admin/RPI/argononed
 sudo ./install
 sudo ./configure
 sudo systemctl enable argononed
