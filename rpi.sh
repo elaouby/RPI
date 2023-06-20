@@ -1814,7 +1814,7 @@ clients:
       name: Elaouby
       tags: []
       ids:
-        - 172.16.5.0/24
+        - 10.20.9.0/23
       blocked_services: []
       upstreams: []
       use_global_settings: false
@@ -1835,7 +1835,7 @@ clients:
       name: Management
       tags: []
       ids:
-        - 172.16.6.0/24
+        - 10.20.10.0/24
       blocked_services: []
       upstreams: []
       use_global_settings: true
