@@ -1387,6 +1387,7 @@ echo '	path=/' >> /etc/samba/smb.conf
 echo '	spotlight backend = elasticsearch' >> /etc/samba/smb.conf
 sudo sed -i -e '1 s,$, usbhid.mousepoll=8,' /boot/cmdline.txt
 sudo zerotier-cli join 1c33c1ced0155eb6
+sudo raspi-config nonint do_wifi_ssid_passphrase GCBK q@G_:/i_
 sudo raspi-config nonint do_boot_splash 1
 sudo raspi-config nonint do_blanking 1
 sudo raspi-config nonint do_vnc 0
