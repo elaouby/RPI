@@ -83,7 +83,7 @@ sudo raspi-config nonint do_boot_splash 1
 sudo raspi-config nonint do_blanking 1
 sudo raspi-config nonint do_vnc 0
 crontab -l | { cat; echo "@reboot sleep 15 ; sudo systemctl enable ssh ; sudo systemctl start ssh ; sudo systemctl enable raspi-config.service ; sudo systemctl start raspi-config.service ; sudo teamviewer --daemon start ; sudo systemctl enable teamviewerd.service ; sudo systemctl start teamviewerd.service ; systemctl enable smbd ; systemctl start smbd ; sudo systemctl enable vncserver-x11-serviced.service ; sudo systemctl start vncserver-x11-serviced.service"; } | crontab -
-crontab -l | { cat; echo "#0 6 * * * sudo apt update ; sudo apt full-upgrade -y ; sudo apt-get check ; sudo apt autoremove -y ; sudo apt-get autoclean ; sudo apt-get clean ; sudo find /tmp -type f -delete ; sudo reboot"; } | crontab -
+crontab -l | { cat; echo "0 6 * * * sudo apt update ; sudo apt full-upgrade -y ; sudo apt-get check ; sudo apt autoremove -y ; sudo apt-get autoclean ; sudo apt-get clean ; sudo find /tmp -type f -delete ; sudo reboot"; } | crontab -
 sudo usermod -a -G adm,root,ssl-cert,sudo,gpio,lpadmin admin
 sudo apt-get check
 sudo apt autoremove -y
@@ -489,7 +489,7 @@ sudo raspi-config nonint do_boot_splash 1
 sudo raspi-config nonint do_blanking 1
 sudo raspi-config nonint do_vnc 0
 crontab -l | { cat; echo "@reboot sleep 15 ; sudo systemctl enable ssh ; sudo systemctl start ssh ; sudo systemctl enable raspi-config.service ; sudo systemctl start raspi-config.service ; sudo teamviewer --daemon start ; sudo systemctl enable teamviewerd.service ; sudo systemctl start teamviewerd.service ; systemctl enable smbd ; systemctl start smbd ; sudo systemctl enable vncserver-x11-serviced.service ; sudo systemctl start vncserver-x11-serviced.service ; sudo systemctl enable plexmediaserver.service ; sudo systemctl start plexmediaserver.service"; } | crontab -
-crontab -l | { cat; echo "#0 6 * * * sudo apt update ; sudo apt full-upgrade -y ; sudo apt-get check ; sudo apt autoremove -y ; sudo apt-get autoclean ; sudo apt-get clean ; sudo find /tmp -type f -delete ; sudo reboot"; } | crontab -
+crontab -l | { cat; echo "0 6 * * * sudo apt update ; sudo apt full-upgrade -y ; sudo apt-get check ; sudo apt autoremove -y ; sudo apt-get autoclean ; sudo apt-get clean ; sudo find /tmp -type f -delete ; sudo reboot"; } | crontab -
 sudo usermod -a -G adm,root,ssl-cert,sudo,gpio,lpadmin admin
 sudo apt-get check
 sudo apt autoremove -y
@@ -840,7 +840,7 @@ sudo raspi-config nonint do_boot_splash 1
 sudo raspi-config nonint do_blanking 1
 sudo raspi-config nonint do_vnc 0
 crontab -l | { cat; echo "@reboot sleep 15 ; sudo systemctl enable argononed ; sudo systemctl start argononed ; sudo systemctl enable ssh ; sudo systemctl start ssh ; sudo systemctl enable raspi-config.service ; sudo systemctl start raspi-config.service ; sudo teamviewer --daemon start ; sudo systemctl enable teamviewerd.service ; sudo systemctl start teamviewerd.service ; systemctl enable smbd ; systemctl start smbd ; sudo systemctl enable vncserver-x11-serviced.service ; sudo systemctl start vncserver-x11-serviced.service ; sudo systemctl enable AdGuardHome.service ; sudo systemctl start AdGuardHome.service"; } | crontab -
-crontab -l | { cat; echo "#0 6 * * * sudo apt update ; sudo apt full-upgrade -y ; sudo apt-get check ; sudo apt autoremove -y ; sudo apt-get autoclean ; sudo apt-get clean ; sudo find /tmp -type f -delete ; sudo reboot"; } | crontab -
+crontab -l | { cat; echo "0 6 * * * sudo apt update ; sudo apt full-upgrade -y ; sudo apt-get check ; sudo apt autoremove -y ; sudo apt-get autoclean ; sudo apt-get clean ; sudo find /tmp -type f -delete ; sudo reboot"; } | crontab -
 sudo usermod -a -G adm,root,ssl-cert,sudo,gpio,lpadmin admin
 sudo apt-get check
 sudo apt autoremove -y
@@ -1394,7 +1394,7 @@ sudo raspi-config nonint do_boot_splash 1
 sudo raspi-config nonint do_blanking 1
 sudo raspi-config nonint do_vnc 0
 crontab -l | { cat; echo "@reboot sleep 15 ; sudo systemctl enable argononed ; sudo systemctl start argononed ; sudo systemctl enable ssh ; sudo systemctl start ssh ; sudo systemctl enable raspi-config.service ; sudo systemctl start raspi-config.service ; sudo teamviewer --daemon start ; sudo systemctl enable teamviewerd.service ; sudo systemctl start teamviewerd.service ; systemctl enable smbd ; systemctl start smbd ; sudo systemctl enable vncserver-x11-serviced.service ; sudo systemctl start vncserver-x11-serviced.service ; sudo systemctl enable AdGuardHome.service ; sudo systemctl start AdGuardHome.service"; } | crontab -
-crontab -l | { cat; echo "#0 6 * * * sudo apt update ; sudo apt full-upgrade -y ; sudo apt-get check ; sudo apt autoremove -y ; sudo apt-get autoclean ; sudo apt-get clean ; sudo find /tmp -type f -delete ; sudo reboot"; } | crontab -
+crontab -l | { cat; echo "0 6 * * * sudo apt update ; sudo apt full-upgrade -y ; sudo apt-get check ; sudo apt autoremove -y ; sudo apt-get autoclean ; sudo apt-get clean ; sudo find /tmp -type f -delete ; sudo reboot"; } | crontab -
 sudo usermod -a -G adm,root,ssl-cert,sudo,gpio,lpadmin admin
 sudo apt-get check
 sudo apt autoremove -y
