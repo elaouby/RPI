@@ -1642,8 +1642,9 @@ echo 'Icon=system-file-manager' >> /usr/share/applications/pcmanfmsudo.desktop
 echo 'Name=File Manager PCManFM' >> /usr/share/applications/pcmanfmsudo.desktop
 echo 'Exec=sudo pcmanfm -d /' >> /usr/share/applications/pcmanfmsudo.desktop
 cat <<EOT>> /opt/AdGuardHome/AdGuardHome.yaml
-bind_host: 0.0.0.0
-bind_port: 80
+http:
+  address: 0.0.0.0:80
+  session_ttl: 720h
 users:
   - name: admin
     password: \$2a\$10\$iLx7pRxHoB2Sd5Z/PZ./TuvfF2TEE02oyVdBelY/hwoFqa44Y1z1C
@@ -1653,7 +1654,6 @@ http_proxy: ""
 language: ""
 theme: auto
 debug_pprof: false
-web_session_ttl: 720
 dns:
   bind_hosts:
     - 0.0.0.0
@@ -1661,8 +1661,8 @@ dns:
   anonymize_client_ip: false
   protection_enabled: true
   blocking_mode: default
-  blocking_ipv4: ""
-  blocking_ipv6: ""
+  blocking_ipv4: 65.1.24.143
+  blocking_ipv6: '::'
   blocked_response_ttl: 10
   protection_disabled_until: null
   parental_block_host: family-block.dns.adguard.com
@@ -1671,10 +1671,18 @@ dns:
   ratelimit_whitelist: []
   refuse_any: true
   upstream_dns:
-    - https://dns.google/dns-query
+    - https://dns.google.com/dns-query
     - tls://dns.google
   upstream_dns_file: ""
   bootstrap_dns:
+    - 8.8.8.8
+    - 8.8.4.4
+    - 1.1.1.1
+    - 1.0.0.1
+    - 2001:4860:4860::8888
+    - 2001:4860:4860::8844
+    - 94.140.14.14
+    - 94.140.15.15
     - 9.9.9.10
     - 149.112.112.10
     - 2620:fe::10
@@ -1724,7 +1732,10 @@ dns:
     yandex: true
     youtube: true
   rewrites: []
-  blocked_services: []
+  blocked_services:
+    schedule:
+      time_zone: Local
+    ids: []
   upstream_timeout: 10s
   private_networks: []
   use_private_ptr_resolvers: true
@@ -1780,7 +1791,105 @@ filters:
     name: Steven Black's List
     id: 1686871889
 whitelist_filters: []
-user_rules: []
+user_rules:
+  - '||4chan*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||9gag*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||adlsa.gov.qa*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||aliexpress*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||amazon*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||ask.fm*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||bayt*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||bbc*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||bongacams*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||buzzfeed*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||cams*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||camsoda*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||catererglobal*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||cbs*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||Chatroulette*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||chaturbate*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||cheezburger*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||cheezburger*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||cnbc*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||cnet*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||cnn*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||craigslist*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||deviantart*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||dohanews*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||engadget*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||facebook*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||fbcdn*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||fbpigeon*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||foxnews*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||funnyordie*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||Gizmodo*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||gulftalent*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||hbomax*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||hulu*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||ifunny*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||iloveqatar*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||imgur*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||imo*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||indeed*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||instagram*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||knowyourmeme*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||lifehacker*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||linkedin*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||livejasmin*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||livejournal*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||msn*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||mzadqatar*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||naukrigulf*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||nbc*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||nbcnews*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||netflix*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||nytimes*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||omegle*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||onlyfans*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||panda.tv*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||pinterest*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||piojm*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||porn*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||pornhub*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||primevideo*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||producthunt*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||qatarliving*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||reddit*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||redtube*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||sfgate*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||skype*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||snap*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||snapchat*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||steampowered*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||taobao*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||TechCrunch*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||thenextweb*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||theverge*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||tiktok*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||tinder*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||tmall*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||tube8*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||tumblr*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||tvdigg*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||tvyoutube*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||twitch*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||twitter*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||viber*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||viceebay*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||vimeo*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||wired*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||wish*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||wsj*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||xhamster*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||xing*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||xnxx*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||xtube*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||xvideos*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||yahoo*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||ycombinator*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||youporn*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||youtube*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
+  - '||zhanqi*^$important,client=~Infrastructure|~Elaouby|~Management|~Leaders'
 dhcp:
   enabled: false
   interface_name: ""
@@ -1807,6 +1916,31 @@ clients:
     hosts: true
   persistent:
     - safe_search:
+        enabled: true
+        bing: true
+        duckduckgo: true
+        google: true
+        pixabay: true
+        yandex: true
+        youtube: true
+      blocked_services:
+        schedule:
+          time_zone: Local
+        ids: []
+      name: Blocked
+      ids:
+        - 10.20.12.0/24
+        - 10.20.13.0/24
+      tags: []
+      upstreams: []
+      use_global_settings: true
+      filtering_enabled: false
+      parental_enabled: false
+      safebrowsing_enabled: false
+      use_global_blocked_services: true
+      ignore_querylog: false
+      ignore_statistics: false
+    - safe_search:
         enabled: false
         bing: false
         duckduckgo: false
@@ -1814,16 +1948,169 @@ clients:
         pixabay: false
         yandex: false
         youtube: false
+      blocked_services:
+        schedule:
+          time_zone: Local
+        ids: []
       name: Elaouby
-      tags: []
       ids:
-        - 10.20.9.0/23
-      blocked_services: []
+        - 10.20.9.0/24
+        - 10.20.10.0/24
+      tags: []
       upstreams: []
       use_global_settings: false
       filtering_enabled: true
       parental_enabled: false
       safebrowsing_enabled: true
+      use_global_blocked_services: false
+      ignore_querylog: false
+      ignore_statistics: false
+    - safe_search:
+        enabled: true
+        bing: true
+        duckduckgo: true
+        google: true
+        pixabay: true
+        yandex: true
+        youtube: true
+      blocked_services:
+        schedule:
+          time_zone: Local
+        ids: []
+      name: GCBK
+      ids:
+        - 10.20.7.0/24
+      tags: []
+      upstreams: []
+      use_global_settings: true
+      filtering_enabled: false
+      parental_enabled: false
+      safebrowsing_enabled: false
+      use_global_blocked_services: false
+      ignore_querylog: false
+      ignore_statistics: false
+    - safe_search:
+        enabled: true
+        bing: true
+        duckduckgo: true
+        google: true
+        pixabay: true
+        yandex: true
+        youtube: true
+      blocked_services:
+        schedule:
+          time_zone: Local
+        ids: []
+      name: Guest
+      ids:
+        - 10.20.16.0/24
+      tags: []
+      upstreams: []
+      use_global_settings: true
+      filtering_enabled: false
+      parental_enabled: false
+      safebrowsing_enabled: false
+      use_global_blocked_services: true
+      ignore_querylog: false
+      ignore_statistics: false
+    - safe_search:
+        enabled: false
+        bing: false
+        duckduckgo: false
+        google: false
+        pixabay: false
+        yandex: false
+        youtube: false
+      blocked_services:
+        schedule:
+          time_zone: Local
+        ids: []
+      name: Infrastructure
+      ids:
+        - 10.20.0.0/24
+        - 10.20.1.0/24
+        - 10.20.2.0/24
+        - 10.20.3.0/24
+        - 10.20.4.0/24
+      tags: []
+      upstreams: []
+      use_global_settings: false
+      filtering_enabled: true
+      parental_enabled: false
+      safebrowsing_enabled: true
+      use_global_blocked_services: false
+      ignore_querylog: false
+      ignore_statistics: false
+    - safe_search:
+        enabled: true
+        bing: true
+        duckduckgo: true
+        google: true
+        pixabay: true
+        yandex: true
+        youtube: true
+      blocked_services:
+        schedule:
+          time_zone: Local
+        ids: []
+      name: Leaders
+      ids:
+        - 10.20.6.0/24
+      tags: []
+      upstreams: []
+      use_global_settings: false
+      filtering_enabled: true
+      parental_enabled: true
+      safebrowsing_enabled: true
+      use_global_blocked_services: false
+      ignore_querylog: false
+      ignore_statistics: false
+    - safe_search:
+        enabled: true
+        bing: true
+        duckduckgo: true
+        google: true
+        pixabay: true
+        yandex: true
+        youtube: true
+      blocked_services:
+        schedule:
+          time_zone: Local
+        ids: []
+      name: Management
+      ids:
+        - 10.20.5.0/24
+      tags: []
+      upstreams: []
+      use_global_settings: false
+      filtering_enabled: true
+      parental_enabled: true
+      safebrowsing_enabled: true
+      use_global_blocked_services: false
+      ignore_querylog: false
+      ignore_statistics: false
+    - safe_search:
+        enabled: true
+        bing: true
+        duckduckgo: true
+        google: true
+        pixabay: true
+        yandex: true
+        youtube: true
+      blocked_services:
+        schedule:
+          time_zone: Local
+        ids: []
+      name: Regular
+      ids:
+        - 10.20.14.0/24
+        - 10.20.15.0/24
+      tags: []
+      upstreams: []
+      use_global_settings: true
+      filtering_enabled: false
+      parental_enabled: false
+      safebrowsing_enabled: false
       use_global_blocked_services: true
       ignore_querylog: false
       ignore_statistics: false
@@ -1835,11 +2122,14 @@ clients:
         pixabay: true
         yandex: true
         youtube: true
-      name: Management
-      tags: []
+      blocked_services:
+        schedule:
+          time_zone: Local
+        ids: []
+      name: Staff
       ids:
-        - 10.20.10.0/24
-      blocked_services: []
+        - 10.20.8.0/24
+      tags: []
       upstreams: []
       use_global_settings: true
       filtering_enabled: false
@@ -1848,18 +2138,19 @@ clients:
       use_global_blocked_services: true
       ignore_querylog: false
       ignore_statistics: false
-log_file: ""
-log_max_backups: 0
-log_max_size: 100
-log_max_age: 3
-log_compress: false
-log_localtime: false
-verbose: false
+log:
+  file: ""
+  max_backups: 0
+  max_size: 100
+  max_age: 3
+  compress: false
+  local_time: false
+  verbose: false
 os:
   group: ""
   user: ""
   rlimit_nofile: 0
-schema_version: 20
+schema_version: 24
 EOT
 sudo dphys-swapfile swapoff
 echo 'CONF_SWAPSIZE=16384' > /etc/dphys-swapfile
