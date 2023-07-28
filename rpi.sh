@@ -1117,8 +1117,7 @@ dns:
   ratelimit_whitelist: []
   refuse_any: true
   upstream_dns:
-    - https://dns.google/dns-query
-    - tls://dns.google
+    - quic://unfiltered.adguard-dns.com
   upstream_dns_file: ""
   bootstrap_dns:
     - 9.9.9.10
