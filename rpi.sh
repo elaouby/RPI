@@ -30,8 +30,8 @@ sudo apt install apt-transport-https ntp raspi-config rpi-imager ufw xdotool vlc
 sudo java -jar /home/admin/JDownloader/JDownloader.jar
 curl -s 'https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg' | gpg --import && if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bash; fi
 sudo apt update
-sudo rpi-eeprom-update
-sudo rpi-eeprom-update -d -a
+#sudo rpi-eeprom-update
+#sudo rpi-eeprom-update -d -a
 sudo apt full-upgrade -y
 echo "FallbackNTP=216.239.35.0 216.239.35.4" >> /etc/systemd/timesyncd.conf
 sudo timedatectl set-ntp true
@@ -398,8 +398,8 @@ sudo snap install tautulli
 sudo java -jar /home/admin/JDownloader/JDownloader.jar
 curl -s 'https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg' | gpg --import && if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bash; fi
 sudo apt update
-sudo rpi-eeprom-update
-sudo rpi-eeprom-update -d -a
+#sudo rpi-eeprom-update
+#sudo rpi-eeprom-update -d -a
 sudo apt full-upgrade -y
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 echo "FallbackNTP=216.239.35.0 216.239.35.4" >> /etc/systemd/timesyncd.conf
@@ -983,8 +983,8 @@ wget https://download.teamviewer.com/download/linux/teamviewer_arm64.deb
 sudo apt install apt-transport-https ntp raspi-config rpi-imager ufw xdotool default-jre default-jdk samba git conky conky-all gparted ./teamviewer_arm64.deb smartmontools snapd -y
 curl -s 'https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg' | gpg --import && if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bash; fi
 sudo apt update
-sudo rpi-eeprom-update
-sudo rpi-eeprom-update -d -a
+#sudo rpi-eeprom-update
+#sudo rpi-eeprom-update -d -a
 sudo apt full-upgrade -y
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 echo "FallbackNTP=216.239.35.0 216.239.35.4" >> /etc/systemd/timesyncd.conf
@@ -1533,8 +1533,8 @@ wget https://download.teamviewer.com/download/linux/teamviewer_arm64.deb
 sudo apt install apt-transport-https ntp raspi-config rpi-imager ufw xdotool conky conky-all default-jre default-jdk samba git gparted ./teamviewer_arm64.deb smartmontools snapd -y
 curl -s 'https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg' | gpg --import && if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bash; fi
 sudo apt update
-sudo rpi-eeprom-update
-sudo rpi-eeprom-update -d -a
+#sudo rpi-eeprom-update
+#sudo rpi-eeprom-update -d -a
 sudo apt full-upgrade -y
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 sudo cp -r /home/admin/RPI/AdGuardHome.yaml /opt/AdGuardHome
