@@ -1,4 +1,4 @@
-#git clone https://elaouby@github.com/elaouby/RPI /home/admin/RPI ; cd /home/admin/RPI ; sudo bash ./rpi.sh -r -p -d -g
+#git clone https://elaouby@github.com/elaouby/RPI /home/admin/RPI ; cd /home/admin/RPI ; sudo bash ./rpi.sh -p -r -d -g
 #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
 while getopts "rpdg" option; do
 case $option in
