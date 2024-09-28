@@ -1,0 +1,18 @@
+#git clone https://elaouby@github.com/elaouby/RPI /home/admin/RPI ; cd /home/admin/RPI ; sudo bash ./rpi.sh -p -r -d -g
+#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
+while getopts "rpdg" option; do
+case $option in
+
+
+
+*) # Display help.
+echo "Choose option -r -p -d -g"
+;;
+esac
+done
+sudo find /tmp -type f -delete
+sudo rm -r /home/admin/RPI
+echo "Done"
+echo "Rebooting in 5s..."
+sleep 5
+sudo reboot
