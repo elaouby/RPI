@@ -524,9 +524,19 @@ echo 'Terminal=false' >> /home/admin/.config/autostart/startup.desktop
 sudo mkdir -p /etc/startup
 echo '#! /bin/bash' > /etc/startup/startup.sh
 echo '' >> /etc/startup/startup.sh
-echo 'sudo qbittorrent --no-splash &' >> /etc/startup/startup.sh
-echo 'sleep 30 ;' >> /etc/startup/startup.sh
-echo 'sudo java -jar /home/admin/JDownloader/JDownloader.jar -norestart' >> /etc/startup/startup.sh
+echo 'export DISPLAY=:0' > /etc/startup/startup.sh
+echo 'sudo qbittorrent --no-splash &' > /etc/startup/startup.sh
+echo 'sudo java -jar /home/admin/JDownloader/JDownloader.jar -norestart &' > /etc/startup/startup.sh
+echo '' > /etc/startup/startup.sh
+echo 'for i in {1..10}; do' > /etc/startup/startup.sh
+echo '  wmctrl -r "TeamViewer" -b add,hidden' > /etc/startup/startup.sh
+echo '  if wmctrl -l | grep -q "TeamViewer"; then' > /etc/startup/startup.sh
+echo '    break' > /etc/startup/startup.sh
+echo '  fi' > /etc/startup/startup.sh
+echo '  sleep 3  # Wait 3 seconds before retrying' > /etc/startup/startup.sh
+echo 'done' > /etc/startup/startup.sh
+echo '' > /etc/startup/startup.sh
+echo 'wmctrl -r "qbittorrent" -b add,hidden' > /etc/startup/startup.sh
 chmod +x /etc/startup/startup.sh
 cat <<EOT>> /opt/AdGuardHome/AdGuardHome.yaml
 bind_host: 0.0.0.0
@@ -732,9 +742,9 @@ sudo sed -i 's/autologin-session=LXDE-pi-wayfire/autologin-session=LXDE/' /etc/l
 
 
 
-rm -rf ~/.config/lxpanel
-mkdir -p ~/.config/lxpanel/LXDE/panels
-cat > ~/.config/lxpanel/LXDE/panels/panel <<EOL
+rm -rf /home/admin/.config/lxpanel
+mkdir -p /home/admin/.config/lxpanel/LXDE/panels
+cat > /home/admin/.config/lxpanel/LXDE/panels/panel <<EOL
 # LXPanel Configuration File
 Global {
     edge=top
@@ -749,7 +759,7 @@ Global {
     fontcolor=#FFFFFF  # White text
 }
 Plugin {
-  type=menu
+  type=smenu
   Config {
     image=/usr/share/icons/PiXflat/48x48/places/start-here.png
   }
@@ -791,8 +801,8 @@ EOL
 
 
 
-mkdir -p ~/.config/lxsession/LXDE
-cat > ~/.config/lxsession/LXDE/desktop.conf <<EOL
+mkdir -p /home/admin/.config/lxsession/LXDE
+cat > /home/admin/.config/lxsession/LXDE/desktop.conf <<EOL
 [Session]
 window_manager=openbox-lxde
 disable_autostart=no
@@ -829,8 +839,8 @@ EOL
 
 
 
-mkdir -p ~/.config/gtk-3.0
-cat > ~/.config/gtk-3.0/settings.ini <<EOL
+mkdir -p /home/admin/.config/gtk-3.0
+cat > /home/admin/.config/gtk-3.0/settings.ini <<EOL
 [Settings]
 gtk-theme-name = PiXflat
 gtk-icon-theme-name = PiXflat
@@ -847,6 +857,21 @@ EOL
 
 
 
+# Create the config directory for pcmanfm if it doesn't exist
+mkdir -p /home/admin/.config/pcmanfm/LXDE/
+
+# Set the desktop background to black by updating the config file
+cat > /home/admin/.config/pcmanfm/LXDE/desktop-items-0.conf <<EOL
+[*]
+wallpaper_mode=color
+desktop_bg=#000000
+desktop_fg=#FFFFFF
+desktop_shadow=#000000
+desktop_font=PibotoLt 12
+show_documents=0
+show_trash=0
+show_mounts=0
+EOL
 
 
 
