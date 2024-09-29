@@ -370,25 +370,17 @@ echo '50.0 = 50' >> /etc/argoneon.conf
 echo '52.0 = 55' >> /etc/argoneon.conf
 echo '54.0 = 60' >> /etc/argoneon.conf
 echo '60.0 = 100' >> /etc/argoneon.conf
-xset s noblank
-xset s off
-xset -dpms
 sudo raspi-config nonint do_hostname elaouby-pinas
 sudo sed -i '/^country=/d' /etc/wpa_supplicant/wpa_supplicant.conf
 echo "country=QA" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
-
-
 echo -e "\n# Configuration for Elaouby-Hub\nnetwork={\n\tssid=\"Elaouby-Hub\"\n\tpsk=\"amr919497\"\n\tkey_mgmt=WPA-PSK\n\tproto=WPA RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
 echo -e "\n# Configuration for SecondBite\nnetwork={\n\tssid=\"SecondBite\"\n\tpsk=\"GCBK55555\"\n\tkey_mgmt=WPA-PSK\n\tproto=WPA RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
 echo -e "\n# Configuration for GCBK\nnetwork={\n\tssid=\"GCBK\"\n\tpsk=\"q@G_/:i_\"\n\tkey_mgmt=WPA-PSK\n\tproto=WPA RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
 echo -e "\n# Configuration for Elaouby-Hub (WPA3)\nnetwork={\n\tssid=\"Elaouby-Hub\"\n\tpsk=\"amr919497\"\n\tkey_mgmt=WPA-PSK SAE\n\tproto=RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
 echo -e "\n# Configuration for SecondBite (WPA3)\nnetwork={\n\tssid=\"SecondBite\"\n\tpsk=\"GCBK55555\"\n\tkey_mgmt=WPA-PSK SAE\n\tproto=RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
 echo -e "\n# Configuration for GCBK (WPA3)\nnetwork={\n\tssid=\"GCBK\"\n\tpsk=\"q@G_/:i_\"\n\tkey_mgmt=WPA-PSK SAE\n\tproto=RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
-
 sudo systemctl enable bluetooth
 sudo systemctl start bluetooth
-
-
 (echo 3578; echo 3578) | passwd admin
 echo "deb [trusted=yes] https://downloads.plex.tv/repo/deb public main" >> /etc/apt/sources.list
 echo "root	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
@@ -415,6 +407,7 @@ wget https://download.teamviewer.com/download/linux/teamviewer_arm64.deb
 sudo mkdir -p /home/admin/JDownloader
 wget -O /home/admin/JDownloader/JDownloader.jar http://installer.jdownloader.org/JDownloader.jar
 sudo apt install apt-transport-https ntp raspi-config rpi-imager ufw xdotool vlc qbittorrent default-jre default-jdk samba git gparted ./teamviewer_arm64.deb smartmontools plexmediaserver snapd -y
+sudo apt install --reinstall lxpanel lxde blueman -y
 sudo snap install tautulli
 sudo java -jar /home/admin/JDownloader/JDownloader.jar
 curl -s 'https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg' | gpg --import && if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bash; fi
@@ -511,9 +504,6 @@ echo '	inherit permissions = yes' >> /etc/samba/smb.conf
 sudo sed -i -e '1 s,$, usbhid.mousepoll=8,' /boot/cmdline.txt
 sudo zerotier-cli join 1c33c1ced0155eb6
 sudo zerotier-cli join 8056c2e21cccacaa
-sudo raspi-config nonint do_boot_splash 1
-sudo raspi-config nonint do_blanking 1
-sudo raspi-config nonint do_vnc 0
 crontab -l | { cat; echo "@reboot sleep 15 ; sudo systemctl enable ssh ; sudo systemctl start ssh ; sudo systemctl enable raspi-config.service ; sudo systemctl start raspi-config.service ; sudo teamviewer --daemon start ; sudo systemctl enable teamviewerd.service ; sudo systemctl start teamviewerd.service ; systemctl enable smbd ; systemctl start smbd ; sudo systemctl enable vncserver-x11-serviced.service ; sudo systemctl start vncserver-x11-serviced.service ; sudo systemctl enable plexmediaserver.service ; sudo systemctl start plexmediaserver.service"; } | crontab -
 crontab -l | { cat; echo "0 6 * * * sudo apt update ; sudo apt full-upgrade -y ; sudo apt-get check ; sudo apt autoremove -y ; sudo apt-get autoclean ; sudo apt-get clean ; sudo find /tmp -type f -delete ; sudo reboot"; } | crontab -
 sudo usermod -a -G adm,root,ssl-cert,sudo,gpio,lpadmin admin
@@ -521,18 +511,6 @@ sudo apt-get check
 sudo apt autoremove -y
 sudo apt-get autoclean
 sudo apt-get clean
-sudo mkdir -p /home/admin/.config/pcmanfm/LXDE-pi
-sudo touch /home/admin/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
-echo '[*]' > /home/admin/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
-echo 'desktop_bg=#000000' >> /home/admin/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
-echo 'desktop_shadow=#000000' >> /home/admin/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
-echo 'desktop_fg=#E8E8E8' >> /home/admin/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
-echo 'desktop_font=PibotoLt 12' >> /home/admin/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
-echo 'wallpaper=/usr/share/rpd-wallpaper/clouds.jpg' >> /home/admin/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
-echo 'wallpaper_mode=color' >> /home/admin/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
-echo 'show_documents=0' >> /home/admin/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
-echo 'show_trash=0' >> /home/admin/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
-echo 'show_mounts=0' >> /home/admin/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
 sudo mkdir -p /home/admin/.config/autostart
 sudo cp /usr/share/applications/com.teamviewer.TeamViewer.desktop /home/admin/.config/autostart/com.teamviewer.TeamViewer.desktop
 sudo touch /home/admin/.config/autostart/startup.desktop
@@ -550,211 +528,6 @@ echo 'sudo qbittorrent --no-splash &' >> /etc/startup/startup.sh
 echo 'sleep 30 ;' >> /etc/startup/startup.sh
 echo 'sudo java -jar /home/admin/JDownloader/JDownloader.jar -norestart' >> /etc/startup/startup.sh
 chmod +x /etc/startup/startup.sh
-sudo mkdir -p /home/admin/.config/lxpanel/LXDE-pi
-sudo touch /home/admin/.config/lxpanel/LXDE-pi/config
-echo '[Command]' > /home/admin/.config/lxpanel/LXDE-pi/config
-echo 'Logout=lxde-pi-shutdown-helper' >> /home/admin/.config/lxpanel/LXDE-pi/config
-sudo mkdir -p /home/admin/.config/lxpanel/LXDE-pi/panels
-sudo touch /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '# lxpanel <profile> config file. Manually editing is not recommended.' > /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '# Use preference dialog in lxpanel to adjust config when you can.' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Global {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  edge=top' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  align=left' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  margin=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  widthtype=percent' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  width=100' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  height=32' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  transparent=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  tintcolor=#000000' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  alpha=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  autohide=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  heightwhenhidden=2' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  setdocktype=1' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  setpartialstrut=1' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  usefontcolor=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  fontsize=12' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  fontcolor=#ffffff' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  usefontsize=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  background=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  backgroundfile=/usr/share/lxpanel/images/background.png' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  iconsize=28' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  monitor=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  point_at_menu=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=smenu' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    padding=4' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    image=start-here' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    system {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    separator {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    item {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '      image=system-run' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '      command=run' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    separator {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    item {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '      image=system-shutdown' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '      command=logout' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=space' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    Size=4' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=launchbar' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    Button {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '      id=chromium-browser.desktop' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    Button {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '      id=pcmanfmsudo.desktop' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    Button {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '      id=lxterminal.desktop' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=space' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    Size=8' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=taskbar' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  expand=1' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    tooltips=1' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    IconsOnly=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    ShowAllDesks=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    UseMouseWheel=1' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    UseUrgencyHint=1' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    FlatButton=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    MaxTaskWidth=200' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    spacing=1' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    GroupedTasks=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=space' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    Size=2' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=tray' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=updater' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=ejecter' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    AutoHide=1' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=space' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    Size=2' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=bluetooth' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=space' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    Size=2' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=netman' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=dhcpcdui' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=space' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    Size=2' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=volumepulse' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=micpulse' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=space' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    Size=2' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=dclock' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    ClockFmt=%A, %e %B %Y %l:%M:%S %p' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    TooltipFmt=%A %x' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    BoldFont=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    IconOnly=0' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    CenterText=1' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=space' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    Size=2' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=ptbatt' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=space' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '    Size=2' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo 'Plugin {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  type=magnifier' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  Config {' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '  }' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '}' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-echo '' >> /home/admin/.config/lxpanel/LXDE-pi/panels/panel
-sudo touch /usr/share/applications/pcmanfmsudo.desktop
-echo '[Desktop Entry]' > /usr/share/applications/pcmanfmsudo.desktop
-echo 'Type=Application' >> /usr/share/applications/pcmanfmsudo.desktop
-echo 'Icon=system-file-manager' >> /usr/share/applications/pcmanfmsudo.desktop
-echo 'Name=File Manager PCManFM' >> /usr/share/applications/pcmanfmsudo.desktop
-echo 'Exec=sudo pcmanfm -d /' >> /usr/share/applications/pcmanfmsudo.desktop
 cat <<EOT>> /opt/AdGuardHome/AdGuardHome.yaml
 bind_host: 0.0.0.0
 bind_port: 80
@@ -953,6 +726,135 @@ os:
   rlimit_nofile: 0
 schema_version: 20
 EOT
+sudo sed -i 's/greeter-session=pi-greeter-wayfire/greeter-session=LXDE/' /etc/lightdm/lightdm.conf
+sudo sed -i 's/user-session=LXDE-pi-wayfire/user-session=LXDE/' /etc/lightdm/lightdm.conf
+sudo sed -i 's/autologin-session=LXDE-pi-wayfire/autologin-session=LXDE/' /etc/lightdm/lightdm.conf
+
+
+
+rm -rf ~/.config/lxpanel
+mkdir -p ~/.config/lxpanel/LXDE/panels
+cat > ~/.config/lxpanel/LXDE/panels/panel <<EOL
+# LXPanel Configuration File
+Global {
+    edge=top
+    align=left
+    widthtype=percent
+    width=100
+    height=32
+    transparent=0
+    tintcolor=#000000  # Black background
+    alpha=255          # Full opacity
+    usefontcolor=1
+    fontcolor=#FFFFFF  # White text
+}
+Plugin {
+  type=menu
+  Config {
+    image=/usr/share/icons/PiXflat/48x48/places/start-here.png
+  }
+}
+Plugin {
+  type=taskbar
+  expand=1
+  Config {
+    IconsOnly=0
+  }
+}
+Plugin {
+  type=tray
+  Config {
+  }
+}
+Plugin {
+  type=volume
+  Config {
+  }
+}
+Plugin {
+  type=netman
+  Config {
+  }
+}
+Plugin {
+  type=bluetooth
+  Config {
+  }
+}
+Plugin {
+  type=dclock
+  Config {
+    ClockFmt=%a %d-%b-%Y %I:%M:%S %p
+  }
+}
+EOL
+
+
+
+mkdir -p ~/.config/lxsession/LXDE
+cat > ~/.config/lxsession/LXDE/desktop.conf <<EOL
+[Session]
+window_manager=openbox-lxde
+disable_autostart=no
+polkit/command=lxpolkit
+clipboard/command=lxclipboard
+xsettings_manager/command=build-in
+proxy_manager/command=build-in
+keyring/command=ssh-agent
+quit_manager/command=lxsession-logout
+lock_manager/command=lxlock
+terminal_manager/command=lxterminal
+quit_manager/image=/usr/share/lxde/images/logout-banner.png
+quit_manager/layout=top
+
+[GTK]
+sNet/ThemeName=PiXflat
+sNet/IconThemeName=PiXflat
+sGtk/FontName=Sans 10
+iGtk/ToolbarStyle=3
+iGtk/ButtonImages=1
+iGtk/MenuImages=1
+iGtk/CursorThemeSize=0
+iXft/Antialias=1
+iXft/Hinting=1
+sXft/HintStyle=hintslight
+sXft/RGBA=rgb
+iNet/EnableEventSounds=1
+iNet/EnableInputFeedbackSounds=1
+sGtk/ColorScheme=selected_bg_color:#000000\nselected_fg_color:#FFFFFF\nbar_bg_color:#000000\nbar_fg_color:#FFFFFF\n
+iGtk/ToolbarIconSize=3
+sGtk/CursorThemeName=DMZ-White
+sGtk/IconSizes=gtk-large-toolbar=24,24
+EOL
+
+
+
+mkdir -p ~/.config/gtk-3.0
+cat > ~/.config/gtk-3.0/settings.ini <<EOL
+[Settings]
+gtk-theme-name = PiXflat
+gtk-icon-theme-name = PiXflat
+gtk-font-name = Sans 10
+gtk-cursor-theme-name = DMZ-White
+gtk-toolbar-style = GTK_TOOLBAR_BOTH
+gtk-toolbar-icon-size = GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images = 1
+gtk-menu-images = 1
+gtk-enable-event-sounds = 1
+gtk-enable-input-feedback-sounds = 1
+EOL
+
+
+
+
+
+
+
+
+export DISPLAY=:0
+lxpanelctl restart
+
+
 sudo dphys-swapfile swapoff
 echo 'CONF_SWAPSIZE=16384' > /etc/dphys-swapfile
 echo 'CONF_MAXSWAP=16384' >> /etc/dphys-swapfile
@@ -963,6 +865,7 @@ echo 'hdmi_group=2' >> /boot/config.txt
 echo 'hdmi_mode=82' >> /boot/config.txt
 sudo dphys-swapfile setup
 sudo dphys-swapfile swapon
+sudo systemctl restart lightdm
 ;;
 d)
 #curl https://download.argon40.com/argon1.sh | bash
