@@ -2,7 +2,6 @@
 #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
 while getopts "rpdg" option; do
 case $option in
-
 r)
 xset s noblank
 xset s off
@@ -373,12 +372,9 @@ echo '60.0 = 100' >> /etc/argoneon.conf
 sudo raspi-config nonint do_hostname elaouby-pinas
 sudo sed -i '/^country=/d' /etc/wpa_supplicant/wpa_supplicant.conf
 echo "country=QA" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
-echo -e "\n# Configuration for Elaouby-Hub\nnetwork={\n\tssid=\"Elaouby-Hub\"\n\tpsk=\"amr919497\"\n\tkey_mgmt=WPA-PSK\n\tproto=WPA RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
-echo -e "\n# Configuration for SecondBite\nnetwork={\n\tssid=\"SecondBite\"\n\tpsk=\"GCBK55555\"\n\tkey_mgmt=WPA-PSK\n\tproto=WPA RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
-echo -e "\n# Configuration for GCBK\nnetwork={\n\tssid=\"GCBK\"\n\tpsk=\"q@G_/:i_\"\n\tkey_mgmt=WPA-PSK\n\tproto=WPA RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
-echo -e "\n# Configuration for Elaouby-Hub (WPA3)\nnetwork={\n\tssid=\"Elaouby-Hub\"\n\tpsk=\"amr919497\"\n\tkey_mgmt=WPA-PSK SAE\n\tproto=RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
-echo -e "\n# Configuration for SecondBite (WPA3)\nnetwork={\n\tssid=\"SecondBite\"\n\tpsk=\"GCBK55555\"\n\tkey_mgmt=WPA-PSK SAE\n\tproto=RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
-echo -e "\n# Configuration for GCBK (WPA3)\nnetwork={\n\tssid=\"GCBK\"\n\tpsk=\"q@G_/:i_\"\n\tkey_mgmt=WPA-PSK SAE\n\tproto=RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
+echo -e "\n# Configuration for GCBK\nnetwork={\n\tssid=\"GCBK\"\n\tpsk=\"q@G_/:i_\"\n\tkey_mgmt=WPA-PSK\n\tproto=RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
+echo -e "\n# Configuration for Elaouby-Hub\nnetwork={\n\tssid=\"Elaouby-Hub\"\n\tpsk=\"amr919497\"\n\tkey_mgmt=WPA-PSK SAE\n\tproto=RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
+echo -e "\n# Configuration for SecondBite\nnetwork={\n\tssid=\"SecondBite\"\n\tpsk=\"GCBK55555\"\n\tkey_mgmt=WPA-PSK SAE\n\tproto=RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
 sudo systemctl enable bluetooth
 sudo systemctl start bluetooth
 (echo 3578; echo 3578) | passwd admin
