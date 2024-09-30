@@ -1,4 +1,4 @@
-#git clone https://elaouby@github.com/elaouby/RPI /home/admin/RPI ; cd /home/admin/RPI ; sudo bash ./rpi.sh -p -r -d -g
+#git clone https://elaouby@github.com/elaouby/RPI /home/admin/RPI ; cd /home/admin/RPI ; sudo bash ./rpi2.sh -p -r -d -g
 #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
 while getopts "rpdg" option; do
 case $option in
@@ -390,7 +390,7 @@ echo "admin	ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 sudo mkdir -p /etc/systemd/system/plexmediaserver.service.d
 sudo touch /etc/systemd/system/plexmediaserver.service.d/override.conf
 echo '[Service]' > /etc/systemd/system/plexmediaserver.service.d/override.conf
-echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/media/admin/Plex/"' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
+echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/media/admin/Plex_20TB/"' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
 echo 'User=admin' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
 echo 'Group=admin' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
 echo 'UMask=0000' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
@@ -878,6 +878,9 @@ EOL
 
 export DISPLAY=:0
 lxpanelctl restart
+
+sudo bash -c 'echo -e "\n[SeatDefaults]\nxserver-command=X -s 0 dpms" >> /etc/lightdm/lightdm.conf'
+sudo bash -c 'echo -e "\n@xset s off\n@xset -dpms\n@xset s noblank" >> /etc/xdg/lxsession/LXDE-pi/autostart'
 
 
 sudo dphys-swapfile swapoff
