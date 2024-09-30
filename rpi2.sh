@@ -872,7 +872,9 @@ show_trash=0
 show_mounts=0
 EOL
 
-echo -e "[Desktop Entry]\nVersion=1.0\nName=File Manager (Root)\nGenericName=File Manager\nComment=Open the file manager with root privileges\nExec=gksudo pcmanfm %U\nIcon=system-file-manager\nTerminal=false\nType=Application\nCategories=System;Utility;\nKeywords=file;manager;root;administrator;" | sudo tee /usr/share/applications/root-fileman.desktop > /dev/null
+
+sudo bash -c 'echo -e "[Desktop Entry]\nVersion=1.0\nName=File Manager (Root)\nGenericName=File Manager\nComment=Open the file manager with root privileges\nExec=pkexec pcmanfm\nIcon=system-file-manager\nTerminal=false\nType=Application\nCategories=System;Utility;\nKeywords=file;manager;root;administrator;" > /usr/share/applications/root-fileman.desktop'
+
 sudo chmod +x /usr/share/applications/root-fileman.desktop
 
 
