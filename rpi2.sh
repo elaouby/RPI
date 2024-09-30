@@ -337,6 +337,8 @@ p)
 #(echo 3; echo 1; echo 0) | argon-config #rtc
 #(echo 5; echo 1; echo 1; echo 0) | argon-config #temp-unit
 sudo apt update
+sudo apt update
+sudo apt update
 sudo apt full-upgrade -y
 sudo sed -i 's/en_GB.UTF-8/# en_GB.UTF-8/' /etc/locale.gen
 sudo sed -i 's/# en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen

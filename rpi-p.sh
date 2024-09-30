@@ -45,6 +45,11 @@ echo '52.0 = 55' >> /etc/argoneon.conf
 echo '54.0 = 60' >> /etc/argoneon.conf
 echo '60.0 = 100' >> /etc/argoneon.conf
 sudo raspi-config nonint do_hostname elaouby-pinas
+sudo raspi-config nonint do_boot_splash 1
+sudo raspi-config nonint do_blanking 1
+sudo raspi-config nonint do_vnc 0
+sudo raspi-config nonint do_rpi_connect 0
+echo -e "\n[idle]\ndpms_timeout=0" >> /home/admin/.config/wayfire.ini
 sudo sed -i '/^country=/d' /etc/wpa_supplicant/wpa_supplicant.conf
 echo "country=QA" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
 echo -e "\n# Configuration for GCBK\nnetwork={\n\tssid=\"GCBK\"\n\tpsk=\"q@G_/:i_\"\n\tkey_mgmt=WPA-PSK\n\tproto=RSN\n}" | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf
@@ -90,7 +95,7 @@ wget https://download.teamviewer.com/download/linux/teamviewer_arm64.deb
 sudo mkdir -p /home/admin/JDownloader
 wget -O /home/admin/JDownloader/JDownloader.jar http://installer.jdownloader.org/JDownloader.jar
 sudo chmod 644 /home/admin/teamviewer_arm64.deb
-sudo apt install apt-transport-https ntp blueman raspi-config rpi-imager ufw xdotool vlc qbittorrent default-jre default-jdk samba git gparted ./teamviewer_arm64.deb smartmontools plexmediaserver snapd -y
+sudo apt install apt-transport-https ntp  raspi-config rpi-imager ufw xdotool vlc qbittorrent default-jre default-jdk samba git gparted ./teamviewer_arm64.deb smartmontools plexmediaserver snapd -y
 sudo apt install --reinstall lxpanel lxde -y
 sudo snap install tautulli
 sudo java -jar /home/admin/JDownloader/JDownloader.jar
@@ -560,11 +565,6 @@ lxpanelctl restart
 sudo bash -c 'echo -e "\n[SeatDefaults]\nxserver-command=X -s 0 dpms" >> /etc/lightdm/lightdm.conf'
 sudo bash -c 'echo -e "\n@xset s off\n@xset -dpms\n@xset s noblank" >> /etc/xdg/lxsession/LXDE-pi/autostart'
 
-sudo raspi-config nonint do_boot_splash 1
-sudo raspi-config nonint do_blanking 1
-sudo raspi-config nonint do_vnc 0
-sudo raspi-config nonint do_rpi_connect 0
-echo -e "\n[idle]\ndpms_timeout=0" >> /home/admin/.config/wayfire.ini
 
 sudo dphys-swapfile swapoff
 echo 'CONF_SWAPSIZE=16384' > /etc/dphys-swapfile
