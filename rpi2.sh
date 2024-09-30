@@ -1,5 +1,6 @@
 #git clone https://elaouby@github.com/elaouby/RPI /home/admin/RPI ; cd /home/admin/RPI ; sudo bash ./rpi2.sh -p -r -d -g
 #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
+set -x
 while getopts "rpdg" option; do
 case $option in
 r)
@@ -335,6 +336,8 @@ p)
 #(echo 2; echo y; echo 2; echo y; echo 1) | argon-config #remote
 #(echo 3; echo 1; echo 0) | argon-config #rtc
 #(echo 5; echo 1; echo 1; echo 0) | argon-config #temp-unit
+sudo apt update
+sudo apt full-upgrade -y
 sudo sed -i 's/en_GB.UTF-8/# en_GB.UTF-8/' /etc/locale.gen
 sudo sed -i 's/# en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
 sudo locale-gen
@@ -520,19 +523,19 @@ echo 'Terminal=false' >> /home/admin/.config/autostart/startup.desktop
 sudo mkdir -p /etc/startup
 echo '#! /bin/bash' > /etc/startup/startup.sh
 echo '' >> /etc/startup/startup.sh
-echo 'export DISPLAY=:0' > /etc/startup/startup.sh
-echo 'sudo qbittorrent --no-splash &' > /etc/startup/startup.sh
-echo 'sudo java -jar /home/admin/JDownloader/JDownloader.jar -norestart &' > /etc/startup/startup.sh
-echo '' > /etc/startup/startup.sh
-echo 'for i in {1..10}; do' > /etc/startup/startup.sh
-echo '  wmctrl -r "TeamViewer" -b add,hidden' > /etc/startup/startup.sh
-echo '  if wmctrl -l | grep -q "TeamViewer"; then' > /etc/startup/startup.sh
-echo '    break' > /etc/startup/startup.sh
-echo '  fi' > /etc/startup/startup.sh
-echo '  sleep 3  # Wait 3 seconds before retrying' > /etc/startup/startup.sh
-echo 'done' > /etc/startup/startup.sh
-echo '' > /etc/startup/startup.sh
-echo 'wmctrl -r "qbittorrent" -b add,hidden' > /etc/startup/startup.sh
+echo 'export DISPLAY=:0' >> /etc/startup/startup.sh
+echo 'sudo qbittorrent --no-splash &' >> /etc/startup/startup.sh
+echo 'sudo java -jar /home/admin/JDownloader/JDownloader.jar -norestart &' >> /etc/startup/startup.sh
+echo '' >> /etc/startup/startup.sh
+echo 'for i in {1..10}; do' >> /etc/startup/startup.sh
+echo '  wmctrl -r "TeamViewer" -b add,hidden' >> /etc/startup/startup.sh
+echo '  if wmctrl -l | grep -q "TeamViewer"; then' >> /etc/startup/startup.sh
+echo '    break' >> /etc/startup/startup.sh
+echo '  fi' >> /etc/startup/startup.sh
+echo '  sleep 3  # Wait 3 seconds before retrying' >> /etc/startup/startup.sh
+echo 'done' >> /etc/startup/startup.sh
+echo '' >> /etc/startup/startup.sh
+echo 'wmctrl -r "qbittorrent" -b add,hidden' >> /etc/startup/startup.sh
 chmod +x /etc/startup/startup.sh
 cat <<EOT>> /opt/AdGuardHome/AdGuardHome.yaml
 bind_host: 0.0.0.0
