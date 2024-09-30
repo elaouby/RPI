@@ -394,6 +394,18 @@ echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/media/admin/Plex_2
 echo 'User=admin' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
 echo 'Group=admin' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
 echo 'UMask=0000' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
+sudo mkdir -p -m777 /media/admin/Backup
+sudo mkdir -p -m777 /media/admin/Plex
+sudo mkdir -p -m777 /media/admin/320GB
+sudo mkdir -p -m777 /media/admin/1TB
+sudo mkdir -p -m777 /media/admin/Plex_20TB
+echo 'UUID=21f4e5e2-938c-4589-a335-4938eb37b815    /media/admin/Backup    ext4    defaults,nofail 0 0' >> /etc/fstab
+echo 'UUID=3c9484f6-e5b5-43bb-b9c8-2e6c682e524a    /media/admin/Plex    ext4    defaults,nofail 0 0' >> /etc/fstab
+echo 'UUID=eb8797ec-285c-4d72-bfd1-bc212945c323    /media/admin/320GB    ext4    defaults,nofail 0 0' >> /etc/fstab
+echo 'UUID=145636a1-6d7c-4dd1-8d5d-02657a71950b    /media/admin/1TB    ext4    defaults,nofail 0 0' >> /etc/fstab
+echo 'UUID=cb48f474-56a3-4ff0-ac02-481c27b502f7  /media/admin/Plex_20TB  ext4  defaults,nofail  0  0' >> /etc/fstab
+sudo mount -a
+sudo mkdir -p -m777 /media/admin/Backup/Timemachine
 sudo cp -r /home/admin/RPI/50-local.d /etc/polkit-1/localauthority
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 7FA3303E
 sudo curl -fsSL https://downloads.plex.tv/plex-keys/PlexSign.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/plex.gpg > /dev/null
@@ -425,18 +437,6 @@ sudo ufw allow from 0.0.0.0/0 to any port 4700
 sudo ufw allow from 0.0.0.0/0 to any port 65090
 sudo ufw allow from 0.0.0.0/0 to any port 32400
 sudo ufw allow from 0.0.0.0/0 to any app samba
-sudo mkdir -p -m777 /media/admin/Backup
-sudo mkdir -p -m777 /media/admin/Plex
-sudo mkdir -p -m777 /media/admin/320GB
-sudo mkdir -p -m777 /media/admin/1TB
-sudo mkdir -p -m777 /media/admin/Plex_20TB
-echo 'UUID=21f4e5e2-938c-4589-a335-4938eb37b815    /media/admin/Backup    ext4    defaults,nofail 0 0' >> /etc/fstab
-echo 'UUID=3c9484f6-e5b5-43bb-b9c8-2e6c682e524a    /media/admin/Plex    ext4    defaults,nofail 0 0' >> /etc/fstab
-echo 'UUID=eb8797ec-285c-4d72-bfd1-bc212945c323    /media/admin/320GB    ext4    defaults,nofail 0 0' >> /etc/fstab
-echo 'UUID=145636a1-6d7c-4dd1-8d5d-02657a71950b    /media/admin/1TB    ext4    defaults,nofail 0 0' >> /etc/fstab
-echo 'UUID=cb48f474-56a3-4ff0-ac02-481c27b502f7  /media/admin/Plex_20TB  ext4  defaults,nofail  0  0' >> /etc/fstab
-sudo mount -a
-sudo mkdir -p -m777 /media/admin/Backup/Timemachine
 (echo 3578; echo 3578) | smbpasswd -a -s admin
 echo '[global]' > /etc/samba/smb.conf
 echo '	workgroup = WORKGROUP' >> /etc/samba/smb.conf
