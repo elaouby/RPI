@@ -1,5 +1,9 @@
 #git clone https://elaouby@github.com/elaouby/RPI /home/admin/RPI ; cd /home/admin/RPI ; sudo bash ./rpi-p.sh
 set -x
+sudo apt update
+sudo apt update
+sudo apt update
+sudo apt update
 sudo apt update ; sudo apt full-upgrade -y
 #curl https://download.argon40.com/argoneon.sh | bash
 #(echo 1; echo 1; echo y; echo 1; echo 0) | argon-config #fan
